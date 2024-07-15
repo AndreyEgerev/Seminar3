@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 //@Data
-//@Repository
+@Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
 //  private static final Logger log = LoggerFactory.getLogger(BookRepository.class);

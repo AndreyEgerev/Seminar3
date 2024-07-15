@@ -33,7 +33,7 @@ public class BooksController {
     @GetMapping
     @RequestMapping(method = RequestMethod.GET)
     @Operation(summary = "Get all books", description = "Загружает список всех книг, которые есть в библиотеке")
-    public ResponseEntity<List<Book>> getBookById() {
+    public ResponseEntity<List<Book>> getBook() {
         List<Book> book = bookService.getAllBook();
         log.info(!book.isEmpty() ? book.toString() : "none");
         return !book.isEmpty()

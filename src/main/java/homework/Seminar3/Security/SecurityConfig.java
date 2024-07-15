@@ -17,12 +17,17 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+//        return httpSecurity
+//                .authorizeHttpRequests(authorization -> authorization
+//                        .requestMatchers("/ui/readers/**").hasAnyAuthority("reader", "admin")
+//                        .requestMatchers("/ui/books/**").authenticated()
+//                        .requestMatchers("/ui/issues/**").hasAuthority("admin")
+//                        .anyRequest().permitAll())
+//                .formLogin(Customizer.withDefaults())
+//                .build();
         return httpSecurity
                 .authorizeHttpRequests(authorization -> authorization
-                        .requestMatchers("/ui/readers/**").hasAnyAuthority("reader", "admin")
-                        .requestMatchers("/ui/books/**").authenticated()
-                        .requestMatchers("/ui/issues/**").hasAuthority("admin")
-                        .anyRequest().permitAll())
+                        .anyRequest().denyAll())
                 .formLogin(Customizer.withDefaults())
                 .build();
     }
