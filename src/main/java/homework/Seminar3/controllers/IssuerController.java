@@ -43,8 +43,8 @@ public class IssuerController {
       log.info("409");
       return new ResponseEntity<>(HttpStatusCode.valueOf(409));
     }
-      log.info("200 {}", issue);
-    return ResponseEntity.status(HttpStatus.OK).body(issue);
+      log.info("201 {}", issue);
+    return ResponseEntity.status(HttpStatus.CREATED).body(issue);
   }
 
   @GetMapping("/{id}")

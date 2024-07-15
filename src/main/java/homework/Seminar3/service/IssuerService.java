@@ -57,7 +57,8 @@ public class IssuerService {
   }
 
   public Issue getInfoById(Long id) {
-    return issueRepository.getById(id);
+    //Optional<Issue> issue = issueRepository.findById(id);
+    return issueRepository.findById(id).orElse(null);
   }
 
   public List<Issue> getIssuesByIdReader(Long id) {

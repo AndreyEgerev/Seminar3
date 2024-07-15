@@ -26,14 +26,14 @@ class BooksControllerTest extends JUnitSpringBootBase{
 
     @Test
     void getBookById() {
-        log.info("test1");
+
         Book book = new Book(1L,"Test");
         log.info(book.toString());
 
         Book newBook = bookRepository.save(book);//bookService.addBook(book);
         log.info(newBook.toString());
         Book responseBook = webTestClient.get()
-                .uri("/books/{}", newBook.getId())
+                .uri("/books/" + newBook.getId())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Book.class)
@@ -71,6 +71,7 @@ class BooksControllerTest extends JUnitSpringBootBase{
 
         Book bookWeb = webTestClient.post()
                 .uri("/books")
+                .bodyValue(book)
                 .exchange()
                 .expectStatus().isCreated()
                 .expectBody(Book.class)
@@ -83,13 +84,14 @@ class BooksControllerTest extends JUnitSpringBootBase{
 
     @Test
     void deleteBook() {
+        log.info("Delete test");
         Book book = new Book(1L,"Test");
-        bookRepository.save(book);
+        book = bookRepository.save(book);
         log.info(book.toString());
         webTestClient.delete()
-                .uri("/books/{}", book.getId())
+                .uri("/books/" + book.getId())
                 .exchange()
                 .expectStatus().isNoContent();
-        assertNull(bookService.getBookById(book.getId()));
+        Assertions.assertNull(bookService.getBookById(book.getId()));
     }
 }

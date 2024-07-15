@@ -1,7 +1,7 @@
-package homework.Seminar3.Security;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+//package homework.Seminar3.Security;
+//
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.stereotype.Component;
 
 //@Component
 //public class MemberPasswordEncoder implements PasswordEncoder {

@@ -42,7 +42,7 @@ class ReaderControllerTest extends JUnitSpringBootBase{
         Reader testReader = webTestClient.get()
                 .uri(uri)
                 .exchange()
-                .expectStatus().isFound()
+                .expectStatus().isOk()
                 .expectBody(Reader.class)
                 .returnResult().getResponseBody();
 
@@ -63,7 +63,7 @@ class ReaderControllerTest extends JUnitSpringBootBase{
         log.info(issues.toString());
 
         List<Issue> booksWeb = webTestClient.get()
-                .uri("/reader/{}/issue")
+                .uri("/reader/1/issue")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(new ParameterizedTypeReference<List<Issue>>() {})
@@ -83,11 +83,12 @@ class ReaderControllerTest extends JUnitSpringBootBase{
         Reader reader = new Reader(1L,"Test Create");
         log.info(reader.toString());
 
-        Book readerWeb = webTestClient.post()
+        Reader readerWeb = webTestClient.post()
                 .uri("/reader")
+                .bodyValue(reader)
                 .exchange()
                 .expectStatus().isCreated()
-                .expectBody(Book.class)
+                .expectBody(Reader.class)
                 .returnResult().getResponseBody();
         Assertions.assertNotNull(readerWeb);
         Assertions.assertNotNull(readerWeb.getId());
@@ -98,10 +99,10 @@ class ReaderControllerTest extends JUnitSpringBootBase{
     @Test
     void deleteReader() {
         Reader reader = new Reader(1L,"Test Reader");
-        readerRepository.save(reader);
+        reader = readerRepository.save(reader);
         log.info(reader.toString());
         webTestClient.delete()
-                .uri("/reader/{}", reader.getId())
+                .uri("/reader/" + reader.getId())
                 .exchange()
                 .expectStatus().isNoContent();
         assertNull(readerService.getReaderById(reader.getId()));

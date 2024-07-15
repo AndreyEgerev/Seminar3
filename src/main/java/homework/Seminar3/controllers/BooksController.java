@@ -53,7 +53,7 @@ public class BooksController {
         //new ResponseEntity<>(newBook, HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")
-    @RequestMapping(method = RequestMethod.DELETE)
+//    @RequestMapping(method = RequestMethod.DELETE)
     @Operation(summary = "Delete book by id", description = "Удаляет книгу с указанным идентификатором из библиотеки")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         bookService.deleteBookById(id);
